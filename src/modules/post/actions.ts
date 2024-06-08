@@ -1,13 +1,13 @@
 import {AxiosRequestConfig, AxiosResponse} from 'axios';
 
 import {formatPostsFromRequestToList} from './formatters';
-import {BASE_URL} from '../../network/network';
+import config from '../../config/config';
 import {RootState, addMoreList, storeList, updateFlag} from '../store/store';
 import {FlagTypes} from '../flags/types';
 import Toast from 'react-native-toast-message';
 
 export const POST_ITEMS_PER_PAGE = 15;
-
+const {BASE_URL} = config
 const fireNoConnectionInfo = () => {
   Toast.show({
     type: 'error',
@@ -61,6 +61,11 @@ export const getPosts = (isRefresh: boolean = false): any => {
       await axiosRequest(options, getPostsDataHandler);
     } catch (error) {
       console.error('Error fetching posts:', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Fetching posts',
+        text2: 'Something went wrong',
+      });
     } finally {
       dispatch(updateFlag({flag, value: false}));
     }
@@ -105,7 +110,11 @@ export const getMorePosts = (): any => {
 
       await axiosRequest(options, getMorePostsDataHandler);
     } catch (error) {
-      console.error('Error fetching more posts:', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Fetching more posts',
+        text2: 'Something went wrong',
+      });
     } finally {
       dispatch(updateFlag({flag: FlagTypes.POSTS_LOADING_MORE, value: false}));
     }

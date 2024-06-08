@@ -12,6 +12,7 @@ type PostDetailProps = {
   webViewContent: webViewContentProps;
 };
 
+//todo type
 const PostDetail: React.FC<PostDetailProps> = ({
   title,
   isOnline,
@@ -19,12 +20,11 @@ const PostDetail: React.FC<PostDetailProps> = ({
   setIsLoading,
   webViewContent,
 }) => {
-
   if (!isOnline && isLoading) {
     // If offline and still loading, lets wait
     return;
   }
-  
+
   if (!isOnline && !isLoading && !webViewContent?.html) {
     // If offline, not loading, and no HTML content, return EmptyListPlaceholder
     return (
@@ -34,24 +34,20 @@ const PostDetail: React.FC<PostDetailProps> = ({
       />
     );
   }
-  
+
   return (
-    <View style={styles.container}>
-      <WebView
-        source={webViewContent}
-        style={styles.mainContainer}
-        onLoadEnd={() => setIsLoading(false)}
-        cacheEnabled={true}
-      />
-    </View>
+    <WebView
+      source={webViewContent}
+      style={styles.container}
+      onLoadEnd={() => setIsLoading(false)}
+      cacheEnabled={true}
+      containerStyle={styles.container}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  mainContainer: {
     flex: 1,
   },
 });

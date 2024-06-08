@@ -6,18 +6,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import {selectIsOnline} from '../modules/network/selectors';
 import {setNetworkStatus} from '../modules/store/store';
 import {StyleSheet, Text, View} from 'react-native';
-const NetworkService = () => {
+const NetworkStatusService = () => {
   const netInfo = useNetInfo();
   const dispatch = useDispatch();
   const isOnline = useSelector(selectIsOnline);
-
+  
   useEffect(() => {
-    if (netInfo !== null && isOnline !== netInfo.isConnected) {
+    if (
+      netInfo !== null &&
+      netInfo.isConnected !== null &&
+      isOnline !== netInfo.isConnected
+    ) {
       dispatch(setNetworkStatus(!!netInfo.isConnected));
     }
   }, [dispatch, isOnline, netInfo]);
 
-  if (isOnline) {
+  if (isOnline || (isOnline && netInfo.isConnected === null)) {
     return null;
   }
   return (
@@ -42,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NetworkService;
+export default NetworkStatusService;

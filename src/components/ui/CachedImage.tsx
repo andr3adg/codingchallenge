@@ -40,11 +40,9 @@ const CachedImage: React.FC<CachedImageProps> = ({uri, style, ...props}) => {
             setLocalUri(`file://${path}`);
           } else {
             setLocalUri('');
-            console.log('Image download failed');
           }
         }
       } catch (err) {
-        console.log('Error caching image:', err);
       } finally {
         setLoading(false);
       }
