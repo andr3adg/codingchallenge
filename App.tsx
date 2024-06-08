@@ -7,14 +7,17 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import Toast from 'react-native-toast-message';
 import Loader from './src/components/ui/Loader';
+import StartupServices from './src/services/StartupServices';
 
 function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<Loader />}>
         <View style={styles.appMainContainer}>
-          <RootNavigation />
-          <Toast />
+          <StartupServices>
+            <RootNavigation />
+            <Toast />
+          </StartupServices>
         </View>
       </PersistGate>
     </Provider>

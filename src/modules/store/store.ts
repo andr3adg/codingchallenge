@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import postsListSlice from './postsListSlice';
 import flagsListSlice from './flagsListSlice';
 import networkSlice, {NetworkState} from './networkSlice';
-import networkMiddleware from '../network/networkMiddleware';
 import myCustomApiService from '../../network/network';
 import {StoredListDataState} from '../post/types';
 import {FlagsState} from '../flags/types';
@@ -46,7 +45,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(networkMiddleware),
+    }),
 });
 
 store.subscribe(() => console.log('Some dispatch action was called!'));
