@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {getFormattedTime} from '../../utils/timeHelper';
 import {PostCardProps} from '../../modules/post/types';
+import CachedImage from './CachedImage';
 
 const PostCard: React.FC<{post: PostCardProps; onPress: () => void}> = ({
   post,
@@ -18,7 +19,7 @@ const PostCard: React.FC<{post: PostCardProps; onPress: () => void}> = ({
   const postCardImage = useCallback(
     () => (
       <View style={styles.imageContainer}>
-        <Image source={{uri: url}} style={styles.image} />
+        <CachedImage uri={url ?? ''} style={styles.image} />
       </View>
     ),
     [url],
@@ -39,9 +40,9 @@ const PostCard: React.FC<{post: PostCardProps; onPress: () => void}> = ({
         </Text>
 
         <View style={styles.infoContainer}>
-          <Text>{author}</Text>
-          <Text>Score: {score}</Text>
-          <Text>{num_comments} Comments</Text>
+          <Text style={styles.smallText}>{author}</Text>
+          <Text style={styles.smallText}>Score: {score}</Text>
+          <Text style={styles.smallText}>{num_comments} Comments</Text>
         </View>
       </View>
     ),
@@ -82,6 +83,9 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  smallText: {
+    fontSize: 12,
   },
   infoContainer: {
     flexDirection: 'row',
