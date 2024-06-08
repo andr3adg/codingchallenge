@@ -12,7 +12,7 @@ type PostDetailContainerProps = {
   route: RouteProp<RootStackParamList, 'PostDetail'>;
 };
 
-export type webViewContentProps = {uri: string} | {html: string};
+export type webViewContentProps = {uri: string} | {html: string | null};
 
 const PostDetailContainer: React.FC<PostDetailContainerProps> = ({route}) => {
   const {permalink, title} = route?.params;
@@ -33,9 +33,7 @@ const PostDetailContainer: React.FC<PostDetailContainerProps> = ({route}) => {
     const loadContent = async () => {
       if (!isOnline) {
         const savedContent = await loadSavedWebPage(mobileUrl);
-        if (savedContent) {
-          setWebViewContent({html: savedContent});
-        }
+        setWebViewContent({html: savedContent});
         setIsLoading(false);
       }
     };

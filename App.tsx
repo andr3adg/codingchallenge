@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import RootNavigation from './src/utils/RootNavigation';
 import {store, persistor} from './src/modules/store/store';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -12,10 +12,10 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<Loader />}>
-        <SafeAreaView style={styles.appMainContainer}>
+        <View style={styles.appMainContainer}>
           <RootNavigation />
           <Toast />
-        </SafeAreaView>
+        </View>
       </PersistGate>
     </Provider>
   );

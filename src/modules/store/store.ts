@@ -21,6 +21,7 @@ import {FlagsState} from '../flags/types';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['network'], // Exclude 'network' reducer from being persisted
 };
 
 const rootReducer: Reducer<{
