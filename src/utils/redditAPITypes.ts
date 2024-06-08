@@ -126,6 +126,28 @@ export interface RedditPostData {
   is_video: boolean;
 }
 
+interface Media {
+  type: string | null;
+  oembed?: OEmbed;
+}
+
+interface OEmbed {
+  provider_url: string;
+  description: string;
+  title: string;
+  url: string;
+  author_name: string;
+  height: number | null;
+  width: number | null;
+  html: string;
+  thumbnail_width: number | null;
+  version: string;
+  provider_name: string;
+  thumbnail_url: string;
+  type: string;
+  thumbnail_height: number | null;
+}
+
 interface FlairRichText {
   e: string;
   t: string;
@@ -207,4 +229,11 @@ interface Icon {
   url: string;
   width: number;
   height: number;
+}
+
+export enum RedditCategories {
+  HOT = 'hot',
+  NEW = 'new',
+  TOP = 'top',
+  RISING = 'rising',
 }

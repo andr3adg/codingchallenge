@@ -1,5 +1,5 @@
 const config = {
-  BASE_URL: 'https://api.reddit.com/r/pics/hot.json',
+  BASE_URL: 'https://api.reddit.com/r/pics/{selectedCategory}.json',
   TIMEOUT_DURATION: 20000,
 };
 

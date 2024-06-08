@@ -1,31 +1,57 @@
+import {RedditCategories} from '../../utils/redditAPITypes';
 import {StoredListDataState} from '../post/types';
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
-export const initialState: StoredListDataState = {
-  metadata: {
-    currentIndex: 0,
-  },
-  data: [],
+const generateInitialState = (): Record<
+  RedditCategories,
+  StoredListDataState
+> => {
+  const initialState: Record<RedditCategories, StoredListDataState> =
+    {} as Record<RedditCategories, StoredListDataState>;
+
+  Object.values(RedditCategories).forEach(category => {
+    initialState[category] = {
+      metadata: {
+        currentIndex: 0,
+      },
+      data: [],
+    };
+  });
+
+  return initialState;
 };
 
+export const DEFAULT_SELECTED_CATEGORY: RedditCategories = RedditCategories.HOT;
+
+const initialState: {
+  selectedCategory: RedditCategories;
+} & Record<RedditCategories, StoredListDataState> = {
+  selectedCategory: DEFAULT_SELECTED_CATEGORY,
+  ...generateInitialState(),
+};
 export default createSlice({
   name: 'storedListData',
   initialState,
   reducers: {
-    storeList: (state, action) => {
-      state.metadata = action.payload.metadata;
-      state.data = action.payload.data;
-    },
-    addMoreList: (state, action) => {
+    storeList: (state, action: PayloadAction<StoredListDataState>) => {
       const {metadata, data} = action.payload;
-      state.metadata = {...metadata};
-      state.data = [...state.data, ...data];
+      const {selectedCategory} = state;
+      state[selectedCategory].metadata = {...metadata};
+      state[selectedCategory].data = [...data];
+    },
+    addMoreList: (state, action: PayloadAction<StoredListDataState>) => {
+      const {metadata, data} = action.payload;
+      const {selectedCategory} = state;
+      state[selectedCategory].metadata = {...metadata};
+      state[selectedCategory].data = [...state[selectedCategory].data, ...data];
     },
     cleanList: state => {
-      state.metadata = {
-        currentIndex: 0,
-      };
-      state.data = [];
+      const selectedCategory = state.selectedCategory;
+      state[selectedCategory].metadata = {currentIndex: 0};
+      state[selectedCategory].data = [];
+    },
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
     },
   },
 });

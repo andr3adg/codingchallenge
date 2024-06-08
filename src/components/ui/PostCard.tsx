@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    paddingHorizontal: 10,
+    paddingRight: 10,
     justifyContent: 'space-between',
   },
   imageContainer: {

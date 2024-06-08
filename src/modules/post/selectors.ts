@@ -1,15 +1,10 @@
 // selectors.ts
-import {createSelector} from '@reduxjs/toolkit';
 import {RootState} from '../store/store';
 import {PostCardProps} from '../post/types';
+import {RedditCategories} from '../../utils/redditAPITypes';
 
-// Input selector to get the raw posts data from the state
-const selectRawPostsData = (state: RootState) => state.posts.data;
+export const selectPostsData = (state: RootState): PostCardProps[] =>
+  state?.posts[state?.posts?.selectedCategory]?.data || [];
 
-// Selector to transform the raw posts data if needed
-export const selectPostsData = createSelector(
-  [selectRawPostsData],
-  (data: PostCardProps[]) => {
-    return [...data];
-  },
-);
+export const selectSelectedCategory = (state: RootState): RedditCategories =>
+  state?.posts?.selectedCategory;

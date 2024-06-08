@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {axiosRequest} from '../network/network';
 import {AxiosRequestConfig, AxiosResponse} from 'axios';
+import {RedditCategories} from './redditAPITypes';
+import config from '../config/config';
 
 //todo type
 export const paramsToQueryString = params => {
@@ -35,4 +37,8 @@ export const loadSavedWebPage = async (
     console.error('Error loading saved web page:', error);
     return null;
   }
+};
+
+export const getCategoryUrl = (category: RedditCategories) => {
+  return config.BASE_URL.replace('{selectedCategory}', category);
 };

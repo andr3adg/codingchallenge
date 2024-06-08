@@ -1,3 +1,5 @@
+import {RedditCategories} from '../../utils/redditAPITypes';
+
 export type PostCardProps = {
   id: string;
   title: string;
@@ -14,9 +16,15 @@ export type PostCardNavigationParams = {
   title: string;
 };
 
+
 export interface StoredListDataState {
   metadata: {
     currentIndex: number;
   };
   data: PostCardProps[];
 }
+
+
+export type PostsDataStoreType = {
+  selectedCategory: RedditCategories;
+} & Record<RedditCategories, StoredListDataState>;

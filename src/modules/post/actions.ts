@@ -1,13 +1,12 @@
 import {AxiosRequestConfig, AxiosResponse} from 'axios';
 
 import {formatPostsFromRequestToList} from './formatters';
-import config from '../../config/config';
 import {RootState, addMoreList, storeList, updateFlag} from '../store/store';
 import {FlagTypes} from '../flags/types';
 import Toast from 'react-native-toast-message';
+import {getCategoryUrl} from '../../utils/misc';
 
 export const POST_ITEMS_PER_PAGE = 15;
-const {BASE_URL} = config
 const fireNoConnectionInfo = () => {
   Toast.show({
     type: 'error',
@@ -36,14 +35,16 @@ export const getPosts = (isRefresh: boolean = false): any => {
       ? FlagTypes.POSTS_REFRESHING
       : FlagTypes.POSTS_LOADING;
     try {
-      const isConnected = getState().network.isConnected;
+      const {network, posts} = getState();
+      const isConnected = network.isConnected;
+
       if (!isConnected) {
         fireNoConnectionInfo();
         return;
       }
       dispatch(updateFlag({flag, value: true}));
       const options: AxiosRequestConfig = {
-        url: `${BASE_URL}`,
+        url: `${getCategoryUrl(posts.selectedCategory)}`,
         method: 'GET',
         params: {limit: POST_ITEMS_PER_PAGE},
       };
@@ -86,10 +87,11 @@ export const getMorePosts = (): any => {
         return;
       }
       dispatch(updateFlag({flag: FlagTypes.POSTS_LOADING_MORE, value: true}));
-      const currentCount = posts?.metadata?.currentIndex ?? 0;
+      const currentCount =
+        posts[posts?.selectedCategory]?.metadata?.currentIndex ?? 0;
 
       const options: AxiosRequestConfig = {
-        url: `${BASE_URL}`,
+        url: `${getCategoryUrl(posts.selectedCategory)}`,
         method: 'GET',
         params: {
           limit: POST_ITEMS_PER_PAGE,

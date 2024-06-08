@@ -8,6 +8,8 @@ import styles from './HomeScreen.styles';
 import Loader from '../../components/ui/Loader';
 import {POST_ITEMS_PER_PAGE} from '../../modules/post/actions';
 import EmptyListPlaceholder from '../../components/ui/EmptyListPlaceholder';
+import {useHomeCategories} from '../../context/HomeCategoriesContext';
+import HomeHeader from './components/HomeHeader/HomeHeader';
 
 type HomeScreenProps = {
   navigation: NavigationProp<RootStackParamList, 'Home'>;
@@ -55,33 +57,43 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
   isLoadingMore,
   hasTriedFirstLoad,
 }) => {
+  const {selectedCategory, categories, onPressCategory} = useHomeCategories();
+
   if (isLoading) {
     return <Loader />;
   }
 
-  if (hasTriedFirstLoad && !posts.length && !isLoading) {
+  if (hasTriedFirstLoad && !posts?.length && !isLoading) {
     return <EmptyListPlaceholder onRetry={fetchPosts} />;
   }
 
   return (
-    <FlatList
-      keyExtractor={item => item.id}
-      data={posts}
-      renderItem={({item}) => renderItem(navigation, item)}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
-      ItemSeparatorComponent={itemSeparator}
-      ListFooterComponent={isLoadingMore ? <Loader /> : undefined}
-      onRefresh={onRefresh}
-      refreshing={isRefreshing}
-      initialNumToRender={POST_ITEMS_PER_PAGE}
-      /*onEndReachedThreshold={0.3}
-      onEndReached={
-        posts.length >= POST_ITEMS_PER_PAGE && !isLoadingMore
-          ? onLoadMore
-          : undefined
-      }*/
-    />
+    <>
+      <HomeHeader
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onPress={onPressCategory}
+      />
+      <FlatList
+        keyExtractor={item => item.id}
+        data={posts}
+        renderItem={({item}) => renderItem(navigation, item)}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={itemSeparator}
+        ListFooterComponent={isLoadingMore ? <Loader /> : undefined}
+        onRefresh={onRefresh}
+        refreshing={isRefreshing}
+        initialNumToRender={POST_ITEMS_PER_PAGE}
+
+        /*onEndReachedThreshold={0.3}
+        onEndReached={
+          posts.length >= POST_ITEMS_PER_PAGE && !isLoadingMore
+            ? onLoadMore
+            : undefined
+        }*/
+      />
+    </>
   );
 };
 

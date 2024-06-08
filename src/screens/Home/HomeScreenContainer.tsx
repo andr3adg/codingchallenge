@@ -7,8 +7,9 @@ import HomeScreen from './HomeScreen';
 import {selectPostsData} from '../../modules/post/selectors';
 import {selectFlagValue} from '../../modules/flags/selectors';
 import {FlagTypes} from '../../modules/flags/types';
+import {useHomeCategories} from '../../context/HomeCategoriesContext';
 
-type HomeScreenContainerProps = {
+export type HomeScreenContainerProps = {
   navigation: NavigationProp<RootStackParamList, 'Home'>;
 };
 
@@ -23,11 +24,12 @@ const HomeScreenContainer: React.FC<HomeScreenContainerProps> = ({
   const isLoadingMore = useSelector(
     selectFlagValue(FlagTypes.POSTS_LOADING_MORE),
   );
+  const {selectedCategory} = useHomeCategories();
 
   useEffect(() => {
     dispatch(getPosts());
     setHasTriedFirstLoad(true);
-  }, [dispatch]);
+  }, [dispatch, selectedCategory]);
 
   const fetchPosts = (isRefresh: boolean) => {
     dispatch(getPosts(isRefresh));

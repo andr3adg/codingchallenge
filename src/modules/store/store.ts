@@ -14,7 +14,7 @@ import postsListSlice from './postsListSlice';
 import flagsListSlice from './flagsListSlice';
 import networkSlice, {NetworkState} from './networkSlice';
 import myCustomApiService from '../../network/network';
-import {StoredListDataState} from '../post/types';
+import {PostsDataStoreType} from '../post/types';
 import {FlagsState} from '../flags/types';
 
 const persistConfig = {
@@ -24,7 +24,7 @@ const persistConfig = {
 };
 
 const rootReducer: Reducer<{
-  posts: StoredListDataState;
+  posts: PostsDataStoreType;
   flags: FlagsState;
   network: NetworkState;
 }> = combineReducers({
@@ -54,6 +54,7 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export const {storeList, addMoreList, cleanList} = postsListSlice.actions;
+export const {storeList, addMoreList, cleanList, setSelectedCategory} =
+  postsListSlice.actions;
 export const {updateFlag} = flagsListSlice.actions;
 export const {setNetworkStatus} = networkSlice.actions;

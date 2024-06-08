@@ -3,7 +3,7 @@ import React from 'react';
 
 type EmptyListPlaceholderProps = {
   onRetry?: () => void;
-  hideButton: boolean;
+  hideButton?: boolean;
   customMessage?: string;
 };
 
