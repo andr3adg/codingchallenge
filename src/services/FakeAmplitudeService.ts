@@ -2,9 +2,9 @@
 class FakeAmplitudeService {
   private static FAKE_API_KEY = 'fake-api-key';
   static initialize(): void {
-    console.log(
-      `Amplitude initialized with API Key: ${FakeAmplitudeService.FAKE_API_KEY}`,
-    );
+    // console.log(
+    //   `Amplitude initialized with API Key: ${FakeAmplitudeService.FAKE_API_KEY}`,
+    // );
     // This is where you would normally initialize Amplitude with the given API key
   }
 
