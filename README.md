@@ -56,7 +56,7 @@ Navigation and stack screen creation.
 Global state management for caching mechanism (calls for each category only after, at least, 2 minutes since last category fetch. Also, data persisted for offline usage).\
 Easier redux store creation and management.\
 Persist store between app sessions.\
-Handle asynchronous actions and following side-effects (api calls in this case especially).\
+Handle asynchronous actions and following side-effects (api calls in this case especially).
 
 ### AsyncStorage
 Persistor storage method.\
