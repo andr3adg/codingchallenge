@@ -22,17 +22,14 @@ export interface StoredListDataStateType {
   lastFetchTime: number | null;
 }
 
-// Define the properties of the interface excluding the mapped type
 interface PostsDataStoreBase {
   selectedCategory: RedditCategories;
 }
 
-// Define the mapped type for dynamic category properties
 type PostsDataStoreDynamic = {
   [category in RedditCategories]: StoredListDataStateType;
 };
 
-// Combine the base properties with the dynamic properties
 export interface PostsDataStoreType
   extends PostsDataStoreBase,
     PostsDataStoreDynamic {}

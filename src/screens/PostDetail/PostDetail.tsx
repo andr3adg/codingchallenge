@@ -12,7 +12,6 @@ type PostDetailProps = {
   webViewContent: webViewContentProps;
 };
 
-//todo type
 const PostDetail: React.FC<PostDetailProps> = ({
   title,
   isOnline,

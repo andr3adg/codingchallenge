@@ -1,4 +1,3 @@
-// selectors.ts
 import {RootState} from '../store/store';
 import {PostCardProps} from '../post/types';
 import {RedditCategories} from '../../utils/redditAPITypes';

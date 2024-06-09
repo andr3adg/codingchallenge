@@ -6,6 +6,7 @@ import {selectIsOnline} from '../../modules/network/selectors';
 import {RootStackParamList} from '../../utils/RootNavigation';
 import PostDetail from './PostDetail';
 import {downloadWebPage, loadSavedWebPage} from '../../utils/misc';
+import config from '../../config/config';
 
 type PostDetailContainerProps = {
   navigation: NavigationProp<RootStackParamList, 'PostDetail'>;
@@ -17,7 +18,7 @@ export type webViewContentProps = {uri: string} | {html: string | null};
 const PostDetailContainer: React.FC<PostDetailContainerProps> = ({route}) => {
   const {permalink, title} = route?.params;
   const isOnline = useSelector(selectIsOnline);
-  const mobileUrl = 'https://m.reddit.com' + permalink;
+  const mobileUrl = config.MOBILE_URL + permalink;
   const [isLoading, setIsLoading] = useState(true);
   const [webViewContent, setWebViewContent] = useState<webViewContentProps>({
     uri: mobileUrl,

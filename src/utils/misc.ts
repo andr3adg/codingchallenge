@@ -95,7 +95,6 @@ export const cacheImage = async (
     } else if (!isOnline) {
       return '';
     } else {
-      // Download the image
       const downloadResult = await RNFS.downloadFile({
         fromUrl: uri,
         toFile: path,

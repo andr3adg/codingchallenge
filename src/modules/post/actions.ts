@@ -18,7 +18,6 @@ const getResponseFormattedList = (response: AxiosResponse): PostCardProps[] => {
   return formatPostsFromRequestToList(rawList);
 };
 
-//todo type dispatch
 export const getPosts = (isRefresh: boolean = false): any => {
   return async (
     dispatch: any,
@@ -65,7 +64,6 @@ export const getPosts = (isRefresh: boolean = false): any => {
   };
 };
 
-//todo type dispatch
 export const getMorePosts = (): any => {
   return async (
     dispatch: any,
