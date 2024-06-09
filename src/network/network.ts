@@ -1,6 +1,8 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 import overallConfig from '../config/config';
 import Toast from 'react-native-toast-message';
+import FakeSentryService from '../services/FakeSentryService';
+import FakeAmplitudeService from '../services/FakeAmplitudeService';
 
 //interceptor for overall request config, just demo
 const requestInterceptors = (config: AxiosRequestConfig) => {
@@ -20,9 +22,13 @@ export const axiosRequest = async (
   dataHandler: (response: AxiosResponse) => void,
 ) => {
   try {
+    FakeAmplitudeService.logEvent('Axios Call');
+
     const response = await axios(options);
     dataHandler(response);
   } catch (error: any) {
+    //Fake Sentry exception capture
+    FakeSentryService.captureException(error);
     Toast.show({
       type: 'error',
       text1: 'Api Request Error',
