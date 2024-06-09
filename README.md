@@ -39,7 +39,7 @@ This is one way to run your app — you can also run it from Xcode directly.
 
 ## Congratulations! :tada:
 
-You've successfully run and modified this React Native App.
+You've successfully run this React Native App.
 
 ## Libraries installed/used and for what purpose:
 
