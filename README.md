@@ -39,27 +39,27 @@ This is one way to run your app — you can also run it from Xcode directly.
 
 ## Congratulations! :tada:
 
-You've successfully run and modified this React Native App. 
+You've successfully run and modified this React Native App.
 
 ## Libraries installed/used and for what purpose:
 
 ### FS
-Reddit Posts image caching (download locally for better performance but especially for offline usage)
+Reddit Posts image caching (download locally for better performance but especially for offline usage).
 
 ### NetInfo
-Detect connection changes for several logic conditions (offline mode)
+Detect connection changes for several logic conditions (offline mode).
 
 ### Navigation/native, native-stack
-Navigation and stack screen creation
+Navigation and stack screen creation.
 
 ### Redux: toolkit, persist andthunk
-Global state management for caching mechanism (calls for each category only after, at least, 2 minutes since last category fetch. Also, data persisted for offline wage)
-Easier redux store creation and management
-Persist store between app sessions
-Handle asynchronous actions and following side-effects (api calls in this case especially)
+Global state management for caching mechanism (calls for each category only after, at least, 2 minutes since last category fetch. Also, data persisted for offline usage).\
+Easier redux store creation and management.\
+Persist store between app sessions.\
+Handle asynchronous actions and following side-effects (api calls in this case especially).\
 
 ### AsyncStorage
-Persistor storage method
+Persistor storage method.\
 Used to store webview pages for offline usage (downloaded on PostDetail screen mount)
 
 ### Axios
@@ -75,5 +75,5 @@ For user information when needed
 Display posts directly on web, online and offline
 
 ## Notes:
- Continuous scrolling/fetching was implemented but had no more time to fix a looping bug, probably threshold related or overall logic, so its commented out. For Monitoring and production trouble shooting, a FakeAmplitudeService and a FakeSentryService were created, as a demo to how they would be implemented and used. FakeSentryService also as a custom "Wrap" function to have the app inside the error boundary of Sentry, as in a normal implementation.
+ Continuous scrolling/fetching was implemented but had no more time to fix a looping bug, probably threshold related or overall logic, so its commented out.\ For Monitoring and production trouble shooting, a FakeAmplitudeService and a FakeSentryService were created, as a demo to how they would be implemented and used. FakeSentryService also as a custom "Wrap" function to have the app inside the error boundary of Sentry, as in a normal implementation.
 
