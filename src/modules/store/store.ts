@@ -12,10 +12,11 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import postsListSlice from './postsListSlice';
 import flagsListSlice from './flagsListSlice';
-import networkSlice, {NetworkState} from './networkSlice';
+import networkSlice from './networkSlice';
 import myCustomApiService from '../../network/network';
 import {PostsDataStoreType} from '../post/types';
 import {FlagsState} from '../flags/types';
+import {NetworkState} from '../network/types';
 
 const persistConfig = {
   key: 'root',

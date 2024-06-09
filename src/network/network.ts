@@ -5,7 +5,9 @@ import FakeSentryService from '../services/FakeSentryService';
 import FakeAmplitudeService from '../services/FakeAmplitudeService';
 
 //interceptor for overall request config, just demo
-const requestInterceptors = (config: AxiosRequestConfig) => {
+const requestInterceptors = (
+  config: AxiosRequestConfig,
+): AxiosRequestConfig => {
   config.timeout = overallConfig.TIMEOUT_DURATION;
   return config;
 };
