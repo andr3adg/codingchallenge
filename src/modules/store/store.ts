@@ -48,7 +48,7 @@ export const store = configureStore({
     }),
 });
 
-store.subscribe(() => console.log('Some dispatch action was called!'));
+store.subscribe(() => {});
 
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;

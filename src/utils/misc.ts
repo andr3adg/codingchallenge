@@ -103,7 +103,6 @@ export const cacheImage = async (
       return downloadResult.statusCode === 200 ? `file://${path}` : '';
     }
   } catch (err) {
-    console.log('Error downloading image: ', err);
     return '';
   }
 };
