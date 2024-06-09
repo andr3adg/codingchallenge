@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Image, ImageProps, StyleProp, ImageStyle} from 'react-native';
-import RNFS from 'react-native-fs';
 import Loader from '../Loader/Loader';
 import {useSelector} from 'react-redux';
 import {selectIsOnline} from '../../../modules/network/selectors';
+import {cacheImage} from '../../../utils/misc';
 
 interface CachedImageProps extends Omit<ImageProps, 'source' | 'style'> {
   uri: string;
@@ -16,39 +16,12 @@ const CachedImage: React.FC<CachedImageProps> = ({uri, style, ...props}) => {
   const isOnline = useSelector(selectIsOnline);
 
   useEffect(() => {
-    const cacheImage = async () => {
-      const filename = uri.substring(uri.lastIndexOf('/') + 1);
-      const path = `${RNFS.CachesDirectoryPath}/${filename}`;
-
-      try {
-        // Check if the image already exists locally
-        const fileExists = await RNFS.exists(path);
-
-        if (fileExists) {
-          setLocalUri(`file://${path}`);
-        } else if (!isOnline) {
-          // If the device is offline and the image doesn't exist locally, show placeholder(blank for now))
-          setLocalUri('');
-        } else {
-          // Download the image
-          const downloadResult = await RNFS.downloadFile({
-            fromUrl: uri,
-            toFile: path,
-          }).promise;
-
-          if (downloadResult.statusCode === 200) {
-            setLocalUri(`file://${path}`);
-          } else {
-            setLocalUri('');
-          }
-        }
-      } catch (err) {
-      } finally {
-        setLoading(false);
-      }
+    const handleImage = async () => {
+      const image = await cacheImage(uri, isOnline);
+      setLocalUri(image);
+      setLoading(false);
     };
-
-    cacheImage();
+    handleImage();
   }, [isOnline, uri]);
 
   if (loading) {
