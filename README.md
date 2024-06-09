@@ -41,5 +41,39 @@ This is one way to run your app — you can also run it from Xcode directly.
 
 You've successfully run and modified this React Native App. 
 
+## Libraries installed/used and for what purpose:
+
+### FS
+Reddit Posts image caching (download locally for better performance but especially for offline usage)
+
+### NetInfo
+Detect connection changes for several logic conditions (offline mode)
+
+### Navigation/native, native-stack
+Navigation and stack screen creation
+
+### Redux: toolkit, persist andthunk
+Global state management for caching mechanism (calls for each category only after, at least, 2 minutes since last category fetch. Also, data persisted for offline wage)
+Easier redux store creation and management
+Persist store between app sessions
+Handle asynchronous actions and following side-effects (api calls in this case especially)
+
+### AsyncStorage
+Persistor storage method
+Used to store webview pages for offline usage (downloaded on PostDetail screen mount)
+
+### Axios
+API requests
+
+### Date-fns
+Date formatting
+
+### Toast-message
+For user information when needed
+
+### Webview
+Display posts directly on web, online and offline
+
 ## Notes:
  Continuous scrolling/fetching was implemented but had no more time to fix a looping bug, probably threshold related or overall logic, so its commented out
+
