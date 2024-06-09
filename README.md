@@ -75,5 +75,7 @@ For user information when needed
 Display posts directly on web, online and offline
 
 ## Notes:
- Continuous scrolling/fetching was implemented but had no more time to fix a looping bug, probably threshold related or overall logic, so its commented out.\ For Monitoring and production trouble shooting, a FakeAmplitudeService and a FakeSentryService were created, as a demo to how they would be implemented and used. FakeSentryService also as a custom "Wrap" function to have the app inside the error boundary of Sentry, as in a normal implementation.
+Styling was as simple as possible to serve the purpose of creating the app and having it functional. No real attention was put on it, at all, to complete the task in time (with my own personal time constraints).\
+Continuous scrolling/fetching was implemented but had no more time to fix a looping bug, probably threshold related or overall logic, so its commented out.\
+For Monitoring and production trouble shooting, a FakeAmplitudeService and a FakeSentryService were created, as a demo to how they would be implemented and used. FakeSentryService also as a custom "Wrap" function to have the app inside the error boundary of Sentry, as in a normal implementation.
 
