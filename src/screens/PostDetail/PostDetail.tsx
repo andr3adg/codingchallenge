@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import WebView from 'react-native-webview';
 import {webViewContentProps} from './PostDetailContainer';
-import EmptyListPlaceholder from '../../components/ui/EmptyListPlaceholder';
+import EmptyListPlaceholder from '../../components/ui/EmptyListPlaceholder/EmptyListPlaceholder';
 
 type PostDetailProps = {
   title: string;

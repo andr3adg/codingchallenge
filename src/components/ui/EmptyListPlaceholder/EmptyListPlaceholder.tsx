@@ -1,5 +1,6 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import React from 'react';
+import styles from './EmptyListPlaceholder.styles';
 
 type EmptyListPlaceholderProps = {
   onRetry?: () => void;
@@ -17,18 +18,5 @@ const EmptyListPlaceholder: React.FC<EmptyListPlaceholderProps> = ({
     {!hideButton && <Button title="Retry" onPress={onRetry} />}
   </View>
 );
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-  },
-  text: {
-    fontSize: 32,
-    fontWeight: 'bold',
-  },
-});
 
 export default EmptyListPlaceholder;

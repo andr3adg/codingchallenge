@@ -1,4 +1,4 @@
-export interface Flags {
+interface Flags {
   [key: string]: boolean;
 }
 

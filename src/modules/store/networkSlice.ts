@@ -1,11 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-export interface NetworkState {
-  isConnected: boolean;
-}
+import {NetworkState} from '../network/types';
 
 const initialState: NetworkState = {
-  isConnected: true, // assume online by default
+  isConnected: true,
 };
 
 export default createSlice({

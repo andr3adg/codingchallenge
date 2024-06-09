@@ -10,7 +10,7 @@ const NetworkStatusService = () => {
   const netInfo = useNetInfo();
   const dispatch = useDispatch();
   const isOnline = useSelector(selectIsOnline);
-  
+
   useEffect(() => {
     if (
       netInfo !== null &&

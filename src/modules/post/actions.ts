@@ -5,17 +5,11 @@ import {RootState, addMoreList, storeList, updateFlag} from '../store/store';
 import {FlagTypes} from '../flags/types';
 import Toast from 'react-native-toast-message';
 import {getCategoryUrl} from '../../utils/misc';
+import {PostCardProps} from './types';
 
 export const POST_ITEMS_PER_PAGE = 15;
-const fireNoConnectionInfo = () => {
-  Toast.show({
-    type: 'error',
-    text1: 'Connection Error',
-    text2: 'Device is Offline',
-  });
-};
 
-const getResponseFormattedList = (response: AxiosResponse) => {
+const getResponseFormattedList = (response: AxiosResponse): PostCardProps[] => {
   const {children: rawList = []} = response?.data?.data;
 
   if (!rawList.length) {
@@ -37,10 +31,8 @@ export const getPosts = (isRefresh: boolean = false): any => {
     try {
       const {network, posts} = getState();
       const isConnected = network.isConnected;
-
       if (!isConnected) {
-        fireNoConnectionInfo();
-        return;
+        throw new Error('No internet connection');
       }
       dispatch(updateFlag({flag, value: true}));
       const options: AxiosRequestConfig = {
@@ -53,19 +45,19 @@ export const getPosts = (isRefresh: boolean = false): any => {
         const formattedList = getResponseFormattedList(response);
         dispatch(
           storeList({
-            metadata: {currentIndex: formattedList.length},
+            currentIndex: formattedList.length,
             data: formattedList,
+            lastFetchTime: Date.now(),
           }),
         );
       };
 
       await axiosRequest(options, getPostsDataHandler);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
+    } catch (error: any) {
       Toast.show({
         type: 'error',
         text1: 'Fetching posts',
-        text2: 'Something went wrong',
+        text2: error?.message ?? undefined,
       });
     } finally {
       dispatch(updateFlag({flag, value: false}));
@@ -83,12 +75,10 @@ export const getMorePosts = (): any => {
     try {
       const {posts, network} = getState();
       if (!network?.isConnected) {
-        fireNoConnectionInfo();
-        return;
+        throw new Error('No internet connection');
       }
       dispatch(updateFlag({flag: FlagTypes.POSTS_LOADING_MORE, value: true}));
-      const currentCount =
-        posts[posts?.selectedCategory]?.metadata?.currentIndex ?? 0;
+      const currentCount = posts[posts?.selectedCategory]?.currentIndex ?? 0;
 
       const options: AxiosRequestConfig = {
         url: `${getCategoryUrl(posts.selectedCategory)}`,
@@ -104,18 +94,19 @@ export const getMorePosts = (): any => {
 
         dispatch(
           addMoreList({
-            metadata: {currentIndex: currentCount + formattedList.length},
+            currentIndex: currentCount + formattedList.length,
             data: formattedList,
+            lastFetchTime: Date.now(),
           }),
         );
       };
 
       await axiosRequest(options, getMorePostsDataHandler);
-    } catch (error) {
+    } catch (error: any) {
       Toast.show({
         type: 'error',
-        text1: 'Fetching more posts',
-        text2: 'Something went wrong',
+        text1: 'Fetching posts',
+        text2: error?.message ?? undefined,
       });
     } finally {
       dispatch(updateFlag({flag: FlagTypes.POSTS_LOADING_MORE, value: false}));

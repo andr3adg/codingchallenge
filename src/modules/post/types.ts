@@ -1,6 +1,6 @@
 import {RedditCategories} from '../../utils/redditAPITypes';
 
-export type PostCardProps = {
+export interface PostCardProps {
   id: string;
   title: string;
   author: string;
@@ -9,22 +9,30 @@ export type PostCardProps = {
   created_utc: number;
   url: string | undefined;
   permalink: string;
-};
-
-export type PostCardNavigationParams = {
-  permalink: string;
-  title: string;
-};
-
-
-export interface StoredListDataState {
-  metadata: {
-    currentIndex: number;
-  };
-  data: PostCardProps[];
 }
 
+export interface PostCardNavigationParams {
+  permalink: string;
+  title: string;
+}
 
-export type PostsDataStoreType = {
+export interface StoredListDataStateType {
+  currentIndex: number;
+  data: PostCardProps[];
+  lastFetchTime: number | null;
+}
+
+// Define the properties of the interface excluding the mapped type
+interface PostsDataStoreBase {
   selectedCategory: RedditCategories;
-} & Record<RedditCategories, StoredListDataState>;
+}
+
+// Define the mapped type for dynamic category properties
+type PostsDataStoreDynamic = {
+  [category in RedditCategories]: StoredListDataStateType;
+};
+
+// Combine the base properties with the dynamic properties
+export interface PostsDataStoreType
+  extends PostsDataStoreBase,
+    PostsDataStoreDynamic {}

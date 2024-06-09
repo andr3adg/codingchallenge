@@ -1,20 +1,19 @@
 import {RedditCategories} from '../../utils/redditAPITypes';
-import {StoredListDataState} from '../post/types';
+import {PostsDataStoreType, StoredListDataStateType} from '../post/types';
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
 const generateInitialState = (): Record<
   RedditCategories,
-  StoredListDataState
+  StoredListDataStateType
 > => {
-  const initialState: Record<RedditCategories, StoredListDataState> =
-    {} as Record<RedditCategories, StoredListDataState>;
+  const initialState: Record<RedditCategories, StoredListDataStateType> =
+    {} as Record<RedditCategories, StoredListDataStateType>;
 
   Object.values(RedditCategories).forEach(category => {
     initialState[category] = {
-      metadata: {
-        currentIndex: 0,
-      },
+      currentIndex: 0,
       data: [],
+      lastFetchTime: null,
     };
   });
 
@@ -23,9 +22,7 @@ const generateInitialState = (): Record<
 
 export const DEFAULT_SELECTED_CATEGORY: RedditCategories = RedditCategories.HOT;
 
-const initialState: {
-  selectedCategory: RedditCategories;
-} & Record<RedditCategories, StoredListDataState> = {
+const initialState: PostsDataStoreType = {
   selectedCategory: DEFAULT_SELECTED_CATEGORY,
   ...generateInitialState(),
 };
@@ -33,22 +30,27 @@ export default createSlice({
   name: 'storedListData',
   initialState,
   reducers: {
-    storeList: (state, action: PayloadAction<StoredListDataState>) => {
-      const {metadata, data} = action.payload;
+    storeList: (state, action: PayloadAction<StoredListDataStateType>) => {
+      const {currentIndex, data, lastFetchTime} = action.payload;
       const {selectedCategory} = state;
-      state[selectedCategory].metadata = {...metadata};
-      state[selectedCategory].data = [...data];
+      state[selectedCategory] = {currentIndex, data, lastFetchTime};
     },
-    addMoreList: (state, action: PayloadAction<StoredListDataState>) => {
-      const {metadata, data} = action.payload;
+    addMoreList: (state, action: PayloadAction<StoredListDataStateType>) => {
+      const {currentIndex, data, lastFetchTime} = action.payload;
       const {selectedCategory} = state;
-      state[selectedCategory].metadata = {...metadata};
-      state[selectedCategory].data = [...state[selectedCategory].data, ...data];
+      state[selectedCategory] = {
+        currentIndex,
+        data: [...state[selectedCategory].data, ...data],
+        lastFetchTime,
+      };
     },
     cleanList: state => {
       const selectedCategory = state.selectedCategory;
-      state[selectedCategory].metadata = {currentIndex: 0};
-      state[selectedCategory].data = [];
+      state[selectedCategory] = {
+        currentIndex: 0,
+        data: [],
+        lastFetchTime: null,
+      };
     },
     setSelectedCategory: (state, action) => {
       state.selectedCategory = action.payload;

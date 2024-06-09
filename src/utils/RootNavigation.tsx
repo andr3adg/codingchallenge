@@ -13,11 +13,11 @@ export type RootStackParamList = {
 };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const HomeScreen = ({navigation}: HomeScreenContainerProps) => (
+const HomeScreen = React.memo(({navigation}: HomeScreenContainerProps) => (
   <HomeCategoriesProvider>
     <HomeScreenContainer navigation={navigation} />
   </HomeCategoriesProvider>
-);
+));
 
 const RootNavigation = () => {
   return (

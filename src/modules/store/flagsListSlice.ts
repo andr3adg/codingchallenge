@@ -1,7 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {FlagTypes, FlagsState} from '../flags/types';
 
-export const initialState: FlagsState = {
+const initialState: FlagsState = {
   flags: {
     [FlagTypes.POSTS_LOADING]: false,
     [FlagTypes.POSTS_REFRESHING]: false,

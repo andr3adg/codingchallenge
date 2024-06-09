@@ -8,3 +8,6 @@ export const selectPostsData = (state: RootState): PostCardProps[] =>
 
 export const selectSelectedCategory = (state: RootState): RedditCategories =>
   state?.posts?.selectedCategory;
+
+export const selectLastFetchTime = (state: RootState): number | null =>
+  state?.posts[state?.posts?.selectedCategory]?.lastFetchTime || null;

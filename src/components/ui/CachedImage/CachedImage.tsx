@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Image, ImageProps, StyleProp, ImageStyle} from 'react-native';
 import RNFS from 'react-native-fs';
-import Loader from './Loader';
+import Loader from '../Loader/Loader';
 import {useSelector} from 'react-redux';
-import {selectIsOnline} from '../../modules/network/selectors';
+import {selectIsOnline} from '../../../modules/network/selectors';
 
 interface CachedImageProps extends Omit<ImageProps, 'source' | 'style'> {
   uri: string;

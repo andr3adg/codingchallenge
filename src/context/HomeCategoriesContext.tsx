@@ -13,7 +13,7 @@ type HomeCategoriesContextType = {
   onPressCategory: (category: RedditCategories) => void;
 };
 
-export const HomeCategoriesContext = createContext<HomeCategoriesContextType>({
+const HomeCategoriesContext = createContext<HomeCategoriesContextType>({
   selectedCategory: DEFAULT_SELECTED_CATEGORY,
   categories,
   onPressCategory: () => {},

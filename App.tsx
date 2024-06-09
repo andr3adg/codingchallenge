@@ -6,7 +6,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import {Provider} from 'react-redux';
 import Toast from 'react-native-toast-message';
-import Loader from './src/components/ui/Loader';
+import Loader from './src/components/ui/Loader/Loader';
 import StartupServices from './src/services/StartupServices';
 
 function App(): React.JSX.Element {
