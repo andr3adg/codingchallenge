@@ -52,7 +52,7 @@ Detect connection changes for several logic conditions (offline mode).
 ### Navigation/native, native-stack
 Navigation and stack screen creation.
 
-### Redux: toolkit, persist andthunk
+### Redux: toolkit, persist and thunk
 Global state management for caching mechanism (calls for each category only after, at least, 2 minutes since last category fetch. Also, data persisted for offline usage).\
 Easier redux store creation and management.\
 Persist store between app sessions.\
