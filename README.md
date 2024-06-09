@@ -33,7 +33,7 @@ npm run android
 npx react-native run-ios --simulator="<emulator_name>"
 ```
 
-If everything is set up _correctly_, you should be running the app
+If everything is set up _correctly_, you should be running the app.
 This is one way to run your app — you can also run it from Xcode directly.
 
 
