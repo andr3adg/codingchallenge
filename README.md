@@ -8,7 +8,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 ## React-native: 0.74
 
 
-## Step 1: Install the project:
+## Step 1: Install the project (check dependencies and conditions on your machine are installed and prepared (xCode version, android studio API images and SDK's, etc...)):
 ### For Android and iOS
 
 ```bash
@@ -22,13 +22,13 @@ npx pod-install
 ```
 
 ## Step 2: Run the project
-### For Android (Android Studio emulator open, check all conditions are met on it)
+### For Android (Android Studio emulator)
 
 ```bash
 npm run android
 ```
 
-### For iOS
+### For iOS (xCode emulator )
 ```bash
 npx react-native run-ios --simulator="<emulator_name>"
 ```
