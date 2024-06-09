@@ -9,22 +9,22 @@ class FakeAmplitudeService {
   }
 
   static logEvent(event: string): void {
-    console.log(`Logged event: ${event}`);
+    //console.log(`Logged event: ${event}`);
     // This is where you would normally log the event with Amplitude
   }
 
   static setUserProperties(userProperties: any): void {
-    console.log(`Set user properties: ${JSON.stringify(userProperties)}`);
+    //console.log(`Set user properties: ${JSON.stringify(userProperties)}`);
     // This is where you would normally set user properties with Amplitude
   }
 
   static setUserId(userId: string): void {
-    console.log(`Set user ID: ${userId}`);
+    //console.log(`Set user ID: ${userId}`);
     // This is where you would normally set the user ID with Amplitude
   }
 
   static setGroup(groupType: string, groupName: string): void {
-    console.log(`Set group: ${groupType} - ${groupName}`);
+    //console.log(`Set group: ${groupType} - ${groupName}`);
     // This is where you would normally set groups with Amplitude
   }
 }
